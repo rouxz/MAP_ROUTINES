@@ -85,6 +85,22 @@ MAP_ROUTINES.coordinateFinderList = function (city_list, callback) {
 
 }
 
+/* create an infowindow for display when clicking a market */
+MAP_ROUTINES.createInfoWindow = function (contentString, MAX_WIDTH){
+return new google.maps.InfoWindow({
+      content: contentString,
+      maxWidth: MAX_WIDTH
+  });
+}
+
+
+/* add an infowindow to a marker */
+MAP_ROUTINES.attachInfoWindow = function (infoWindow, marker){
+    google.maps.event.addListener(marker, 'click', function () {
+        infoWindow.open(MAP_ROUTINES.map, marker);
+    });
+}
+
     
     
     
