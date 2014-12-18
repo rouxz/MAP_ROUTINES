@@ -86,18 +86,23 @@ MAP_ROUTINES.coordinateFinderList = function (city_list, callback) {
 }
 
 /* create an infowindow for display when clicking a market */
-MAP_ROUTINES.createInfoWindow = function (contentString, MAX_WIDTH){
+MAP_ROUTINES.createInfoWindow = function (html){
 return new google.maps.InfoWindow({
-      content: contentString,
-      maxWidth: MAX_WIDTH
+      content: html,
+      maxWidth: 1500
   });
 }
 
 
 /* add an infowindow to a marker */
+/* will be displayed on mouseover and hidden on mouseout */
 MAP_ROUTINES.attachInfoWindow = function (infoWindow, marker){
-    google.maps.event.addListener(marker, 'click', function () {
+    marker.infoWindow = infoWindow;
+    google.maps.event.addListener(marker, 'mouseover', function () {
         infoWindow.open(MAP_ROUTINES.map, marker);
+    });
+    google.maps.event.addListener(marker, 'mouseout', function () {
+        infoWindow.close(MAP_ROUTINES.map, marker);
     });
 }
 
